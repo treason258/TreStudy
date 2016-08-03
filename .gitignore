@@ -1,0 +1,10 @@
+.DS_Store
+.svn
+.git
+.gradle
+.idea
+local.properties
+*.iml
+build
+bin
+captures
