@@ -4,7 +4,7 @@
 >
 > ![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/trec-144.png)
 >
-> 网站：[mjiayou.com](http://mjiayou.com)  
+<!-- > 网站：[mjiayou.com](http://mjiayou.com) -->
 
 ## 目录：
 > [一、Android基础](https://github.com/treason258/TreStudy#一android基础-)
@@ -15,10 +15,11 @@
 >
 > [IPC](https://github.com/treason258/TreStudy#ipc-)、[Binder](https://github.com/treason258/TreStudy#binder-)、[Messenger](https://github.com/treason258/TreStudy#messenger-)、[AIDL](https://github.com/treason258/TreStudy#aidl-)
 
-## 一、Android基础 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a> 
+## 一、Android基础 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
 
 ### Android系统框架 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a> 
 ![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/android-framework.png)
+
 Linux内核:进程、线程、电源管理、驱动
 硬件抽象层:音视频接口、GPS接口、通话接口、WIFI接口
 
