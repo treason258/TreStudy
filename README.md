@@ -1,5 +1,4 @@
 # TreStudy
-====================
 
 > 专注于 Android 学习。  
 >
@@ -8,13 +7,13 @@
 > 网站：[mjiayou.com](http://mjiayou.com)  
 
 ## 目录：
-> [一、Android基础](https://github.com/treason258/TreStudy#一android基础)
+> [一、Android基础](https://github.com/treason258/TreStudy#一android基础-)
 >
-> [Android系统框架](https://github.com/treason258/TreStudy#android系统框架)、[Activity](https://github.com/treason258/TreStudy#activity)、[Service](https://github.com/treason258/TreStudy#service)、[BroadcastReceiver](https://github.com/treason258/TreStudy#broadcastreceiver)、[ContentProvider](https://github.com/treason258/TreStudy#contentprovider)、[Intent](https://github.com/treason258/TreStudy#intent)
+> [Android系统框架](https://github.com/treason258/TreStudy#android系统框架-)、[Activity](https://github.com/treason258/TreStudy#activity-)、[Service](https://github.com/treason258/TreStudy#service-)、[BroadcastReceiver](https://github.com/treason258/TreStudy#broadcastreceiver-)、[ContentProvider](https://github.com/treason258/TreStudy#contentprovider-)、[Intent](https://github.com/treason258/TreStudy#intent-)
 >
-> [二、进程间通信](https://github.com/treason258/TreStudy#二进程间通信)
+> [二、进程间通信](https://github.com/treason258/TreStudy#二进程间通信-)
 >
-> [IPC](https://github.com/treason258/TreStudy#ipc)、[Binder](https://github.com/treason258/TreStudy#binder)、[Messenger](https://github.com/treason258/TreStudy#messenger)、[AIDL](https://github.com/treason258/TreStudy#aidl)
+> [IPC](https://github.com/treason258/TreStudy#ipc-)、[Binder](https://github.com/treason258/TreStudy#binder-)、[Messenger](https://github.com/treason258/TreStudy#messenger-)、[AIDL](https://github.com/treason258/TreStudy#aidl-)
 
 ## 一、Android基础 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a> 
 
