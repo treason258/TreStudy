@@ -1,16 +1,19 @@
 TreStudy
 ====================
->专注于 Android 学习。  
+> 专注于 Android 学习。  
 >
->![img](http://ww4.sinaimg.cn/thumb180/005E1iJQjw1enf3nmjm9qj30b30b3q30.jpg)
+> ![img](http://ww4.sinaimg.cn/thumb180/005E1iJQjw1enf3nmjm9qj30b30b3q30.jpg)
 >
->网站：[www.mjiayou.com](http://www.mjiayou.com)  
+> 网站：[www.mjiayou.com](http://www.mjiayou.com)  
 
 ## 目录：
->[一、Android基础](https://github.com/treason258/TreStudy#一android基础)
-包括：[Android系统框架](https://github.com/treason258/TreStudy#android系统框架)、[Activity](https://github.com/treason258/TreStudy#activity)、[Service](https://github.com/treason258/TreStudy#service)、[BroadcastReceiver](https://github.com/treason258/TreStudy#broadcastreceiver)、[ContentProvider](https://github.com/treason258/TreStudy#contentprovider)、[Intent](https://github.com/treason258/TreStudy#intent)
->[二、进程间通信](https://github.com/treason258/TreStudy#二进程间通信)
-包括：[IPC](https://github.com/treason258/TreStudy#ipc)、[Binder](https://github.com/treason258/TreStudy#binder)、[Messenger](https://github.com/treason258/TreStudy#messenger)、[AIDL](https://github.com/treason258/TreStudy#aidl)
+> [一、Android基础](https://github.com/treason258/TreStudy#一android基础)
+>
+> 包括：[Android系统框架](https://github.com/treason258/TreStudy#android系统框架)、[Activity](https://github.com/treason258/TreStudy#activity)、[Service](https://github.com/treason258/TreStudy#service)、[BroadcastReceiver](https://github.com/treason258/TreStudy#broadcastreceiver)、[ContentProvider](https://github.com/treason258/TreStudy#contentprovider)、[Intent](https://github.com/treason258/TreStudy#intent)
+
+> [二、进程间通信](https://github.com/treason258/TreStudy#二进程间通信)
+>
+> 包括：[IPC](https://github.com/treason258/TreStudy#ipc)、[Binder](https://github.com/treason258/TreStudy#binder)、[Messenger](https://github.com/treason258/TreStudy#messenger)、[AIDL](https://github.com/treason258/TreStudy#aidl)
 
 ## 一、Android基础
 ### Android系统框架
