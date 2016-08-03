@@ -1,22 +1,25 @@
-TreStudy
+# TreStudy
 ====================
+
 > 专注于 Android 学习。  
 >
-> ![img](http://ww4.sinaimg.cn/thumb180/005E1iJQjw1enf3nmjm9qj30b30b3q30.jpg)
+> ![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/trec-144.png)
 >
-> 网站：[www.mjiayou.com](http://www.mjiayou.com)  
+> 网站：[mjiayou.com](http://mjiayou.com)  
 
 ## 目录：
 > [一、Android基础](https://github.com/treason258/TreStudy#一android基础)
 >
-> 包括：[Android系统框架](https://github.com/treason258/TreStudy#android系统框架)、[Activity](https://github.com/treason258/TreStudy#activity)、[Service](https://github.com/treason258/TreStudy#service)、[BroadcastReceiver](https://github.com/treason258/TreStudy#broadcastreceiver)、[ContentProvider](https://github.com/treason258/TreStudy#contentprovider)、[Intent](https://github.com/treason258/TreStudy#intent)
-
+> [Android系统框架](https://github.com/treason258/TreStudy#android系统框架)、[Activity](https://github.com/treason258/TreStudy#activity)、[Service](https://github.com/treason258/TreStudy#service)、[BroadcastReceiver](https://github.com/treason258/TreStudy#broadcastreceiver)、[ContentProvider](https://github.com/treason258/TreStudy#contentprovider)、[Intent](https://github.com/treason258/TreStudy#intent)
+>
 > [二、进程间通信](https://github.com/treason258/TreStudy#二进程间通信)
 >
-> 包括：[IPC](https://github.com/treason258/TreStudy#ipc)、[Binder](https://github.com/treason258/TreStudy#binder)、[Messenger](https://github.com/treason258/TreStudy#messenger)、[AIDL](https://github.com/treason258/TreStudy#aidl)
+> [IPC](https://github.com/treason258/TreStudy#ipc)、[Binder](https://github.com/treason258/TreStudy#binder)、[Messenger](https://github.com/treason258/TreStudy#messenger)、[AIDL](https://github.com/treason258/TreStudy#aidl)
 
-## 一、Android基础 - [回到目录](https://github.com/treason258/TreStudy#目录)
-### Android系统框架
+## 一、Android基础 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a> 
+
+### Android系统框架 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a> 
+![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/android-framework.png)
 Linux内核:进程、线程、电源管理、驱动
 硬件抽象层:音视频接口、GPS接口、通话接口、WIFI接口
 
@@ -27,7 +30,7 @@ Linux内核:进程、线程、电源管理、驱动
 
 应用层：桌面应用、联系人应用、通话应用、浏览器应用
 
-### Activity
+### Activity <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 生命周期
 onCreate、onStart、onResume
 onPause、onStop、onDestory
@@ -81,7 +84,7 @@ A-B-A-B A的实例是不变的,而B的实例是新的
 然后原始栈执行之前的操作不变，两个栈同时存在。
 比较复杂,需要借助图形。
 
-### Service
+### Service <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 声明周期
 Service的生命周期可以从两种启动模式开始说起,分别是Context.startService和Context.bindService.
 1、startService启动模式下的生命周期:当首次使用startService启动一个服务时,系统会实例化一个Service实例,依次调用其onCreate和onStartCommand方法,然后进入运行状态。
@@ -113,7 +116,7 @@ startService模式下,调用者与服务无必然联系,及时调用者结束自
 注:
 与服务绑定是个异步的过程,也就是说绑定成功后下一步操作binder对象,有可能为null。
 
-### BroadcastReceiver
+### BroadcastReceiver <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 广播接收者,用来接收来自系统和应用中的广播
 广播体现的方方面面,例如开机、网路状态变化、电池电量变化都会产生广播,接收广播可以及时的处理一些提示和保存数据等。
 
@@ -140,7 +143,7 @@ android:priority来控制优先级,sendOrderedBroadcast发送有序广播,需要
 注:
 1、需要权限声明。
 
-### ContentProvider
+### ContentProvider <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 ContentProvider是数据包装器,适合在不同进程间实现信息共享。
 例如Android中SQLite数据库是典型的数据源,我们可以把它封装到ContentProvider中,就可以很好的为其他应用提供信息共享服务。
 其他应用在访问ContentProvider时,可以使用一组类似REST的URI的方式进行数据操作,大大简化了读写信息的复杂度。
@@ -162,13 +165,14 @@ ContentResolver与ContentProvider是对应的关系,正是通过他来与Content
     android:multiprocess="true" />
 3、读取数据,使用ContentResolver。
 
-### Intent
+### Intent <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 
-## 二、进程间通信 - [回到目录](https://github.com/treason258/TreStudy#目录)
-### IPC
+## 二、进程间通信 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
 
-### Binder
+### IPC <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 
-### Messenger
+### Binder <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 
-### AIDL
+### Messenger <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+
+### AIDL <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
