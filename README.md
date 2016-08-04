@@ -1,6 +1,6 @@
 # TreStudy
 
-> 专注于 Android 学习。  
+> 专注于 Android 学习
 >
 > ![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/trec-144.png)
 >
