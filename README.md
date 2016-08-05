@@ -4,9 +4,11 @@
 >
 > ![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/trec-144.png) 
 >
-> [Android开发工具整理](https://github.com/treason258/TreStudy/blob/master/TOOLS.md)
-> 
-<!-- > 网站：[mjiayou.com](http://mjiayou.com) -->
+> [工欲善其事 必先利其器](https://github.com/treason258/TreStudy/blob/master/TOOLS.md)
+>
+>  
+<!-- [个人博客 - mjiayou.com](http://mjiayou.com) -->
+
 
 ## 目录：
 
