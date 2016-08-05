@@ -4,7 +4,7 @@
 >
 > ![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/trec-144.png) 
 >
-> [Android开发工具整理](https://github.com/treason258/TreStudy/blob/master/TOOL.md)
+> [Android开发工具整理](https://github.com/treason258/TreStudy/blob/master/TOOLS.md)
 > 
 <!-- > 网站：[mjiayou.com](http://mjiayou.com) -->
 
