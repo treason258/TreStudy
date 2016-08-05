@@ -2,30 +2,87 @@
 
 > 专注于 Android 学习
 >
-> ![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/trec-144.png)
+> ![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/trec-144.png) 
 >
 <!-- > 网站：[mjiayou.com](http://mjiayou.com) -->
 
 ## 目录：
 
 - [一、Android基础](https://github.com/treason258/TreStudy#一android基础-)
-	- [Android系统框架](https://github.com/treason258/TreStudy#android系统框架-)
+	- [系统框架](https://github.com/treason258/TreStudy#系统框架-)
 	- [Activity](https://github.com/treason258/TreStudy#activity-)
 	- [Service](https://github.com/treason258/TreStudy#service-)
 	- [BroadcastReceiver](https://github.com/treason258/TreStudy#broadcastreceiver-)
 	- [ContentProvider](https://github.com/treason258/TreStudy#contentprovider-)
 	- [Intent](https://github.com/treason258/TreStudy#intent-)
--  [二、进程间通信](https://github.com/treason258/TreStudy#二进程间通信-)
+	- [Permission](https://github.com/treason258/TreStudy#permission-)
+	- [Service & Thread](https://github.com/treason258/TreStudy#service&thread-)
+	- [HandlerThread & Thread](https://github.com/treason258/TreStudy#handlerthread&thread-)
+	- [IntentService & Service](https://github.com/treason258/TreStudy#intentservice&service-)
+- [二、Java基础](https://github.com/treason258/TreStudy#二java基础-)
+	- [面向对象三大特征](https://github.com/treason258/TreStudy#面向对象三大特征-)
+	- [Thread](https://github.com/treason258/TreStudy#thread-)
+	- [ExecutorService](https://github.com/treason258/TreStudy#executorservice-)
+	- [线程安全](https://github.com/treason258/TreStudy#线程安全-)
+	- [JVM](https://github.com/treason258/TreStudy#jvm-)
+	- [GC](https://github.com/treason258/TreStudy#gc-)
+	- [对象引用](https://github.com/treason258/TreStudy#对象引用-)
+	- [堆和栈](*)
+	- [String分析](*)
+	- [List & Queue & Set & Map](*)
+	- [equals & hashCode](*)
+	- [排序算法](*)
+- [三、多线程编程](https://github.com/treason258/TreStudy#三多线程编程-)
+	- [AsyncTask](*)
+	- [Handler机制](*)
+- [四、进程间通信](https://github.com/treason258/TreStudy#四进程间通信-)
+	- [RPC](https://github.com/treason258/TreStudy#rpc-)
 	- [IPC](https://github.com/treason258/TreStudy#ipc-)
 	- [Binder](https://github.com/treason258/TreStudy#binder-)
 	- [Messenger](https://github.com/treason258/TreStudy#messenger-)
 	- [AIDL](https://github.com/treason258/TreStudy#aidl-)
+- [五、图形图像编程](https://github.com/treason258/TreStudy#五图形图像编程-)
+	- [自定义控件](*)
+	- [View & SurfaceView](*)
+	- [onAttach & onMeasure & onLayout & onDraw](*)
+	- [Canvas](*)
+	- [LayoutInflate](*)
+	- [OpenGL](*)
+- [六、文件存储](https://github.com/treason258/TreStudy#六文件存储-)
+	- [SharedPreferences](*)
+	- [File](*)
+	- [SQLite](*)
+- [七、高性能开发](https://github.com/treason258/TreStudy#七高性能开发-)
+	- [内存溢出和内存泄露](*)
+	- [APP性能优化](*)
+	- [TraceView布局性能优化](*)
+	- [ListView性能优化](*)
+	- [WebView内存泄露问题](*)
+- [八、设计模式](https://github.com/treason258/TreStudy#八设计模式-)
+	- [单例模式](*)
+	- [适配器模式](*)
+	- [工厂模式](*)
+	- [代理模式](*)
+	- [观察者模式](*)
+	- [访问者模式](*)
+	- [命令模式](*)
+	- [组合模式](*)
+	- [建造者模式](*)
+	- [抽象工厂模式](*)
+	- [享元模式](*)
+- [九、源码分析](https://github.com/treason258/TreStudy#九源码分析-)
+	- [GSON](*)
+	- [Volley](*)
+	- [EventBus](*)
+- [N、其他未归类](https://github.com/treason258/TreStudy#N其他未归类-)
+	- [React Navite](*)
+	- [JNI & NDK](*)
+	- [](*)
 
 ## 一、Android基础 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
 
-### Android系统框架 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a> 
-
-![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/android-framework.png)
+### 系统框架 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a> 
+![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/android-framework.png) 
 
 - 底层部分
 	- Linux内核：进程、线程、电源管理、驱动
@@ -89,7 +146,6 @@
 		- 比较复杂，需要借助图形。
 
 ### Service <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
-
 - Service的生命周期可以从两种启动模式开始说起，分别是Context.startService和Context.bindService.
 	- 1、startService启动模式下的生命周期：当首次使用startService启动一个服务时，系统会实例化一个Service实例，依次调用其onCreate和onStartCommand方法，然后进入运行状态。
 此后，如果再使用startService启动服务时，不再创建新的服务对象，系统会自动找到刚才创建的Service实例，调用其onStart方法。
@@ -173,12 +229,40 @@ ContentResolver与ContentProvider是对应的关系，正是通过他来与Conte
 
 ### Intent <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 
-## 二、进程间通信 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
+### Permission <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 
-### IPC <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+### Service & Thread <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 
-### Binder <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+### HandlerThread & Thread <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 
-### Messenger <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+### IntentService & Service <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
 
-### AIDL <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+## 二、Java基础 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
+
+### 面向对象三大特征 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+
+### ExecutorService <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+
+### 线程安全 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+
+### JVM <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+
+### GC <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+
+### 对象引用 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a>
+
+## 三、多线程编程 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
+
+## 四、进程间通信 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
+
+## 五、图形图像编程 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
+
+## 六、文件存储 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
+
+## 七、高性能开发 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
+
+## 八、设计模式 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
+
+## 九、源码分析 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
+
+## N、其他未归类 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
