@@ -25,6 +25,18 @@
 	- [东软开源镜像站](http://mirrors.neusoft.edu.cn/) - AndroidSDK离线更新必备
 	- [AndroidDevTools](http://www.androiddevtools.cn/) - 收集整理Android开发所需的Android SDK
 	- [淘宝NPM镜像](https://npm.taobao.org/)
+- 其他工具
+	- [在线HTTP POST/GET接口测试工具](http://www.atool.org/httptest.php)
+	- [JSON解析](http://www.jsonschema2pojo.org/)
+	- [TinyPNG](https://tinypng.com/) - PNG图片压缩工具
+	- [AndroidAssetStudio](http://romannurik.github.io/AndroidAssetStudio/index.html) - 快速生成资源图片
+	- [Stetho](http://facebook.github.io/stetho/) - Facebook提供的Android调试工具
+	- [LeakCanary](https://github.com/square/leakcanary) - 内存泄露检测工具
+	- [LayoutCast](https://github.com/mmin18/LayoutCast) - 把代码和资源文件的改动直接同步到手机上,应用不需要重启
+	- [chrome://inspect/#devices](chrome://inspect/#devices) - Chome自带调试
+	- [TaoCode](http://code.taobao.org/) - 阿里云提供的SVN代码托管平台
+	- [阿里云Code](https://code.aliyun.com) - 阿里云提供的GIT代码托管平台
+	- [码云](http://git.oschina.net/) - OSChina提供的GIT代码托管平台
 - 第三方
 	- 开放平台
 		- [微博开放平台](http://open.weibo.com/)
@@ -50,18 +62,6 @@
 		- [BEECLOUD](https://beecloud.cn/) - 全新的秒支付应用支付接口
 	- 人脸识别
 		- [Face++](http://www.faceplusplus.com.cn/)
-- 其他工具
-	- [在线HTTP POST/GET接口测试工具](http://www.atool.org/httptest.php)
-	- [JSON解析](http://www.jsonschema2pojo.org/)
-	- [TinyPNG](https://tinypng.com/) - PNG图片压缩工具
-	- [AndroidAssetStudio](http://romannurik.github.io/AndroidAssetStudio/index.html) - 快速生成资源图片
-	- [Stetho](http://facebook.github.io/stetho/) - Facebook提供的Android调试工具
-	- [LeakCanary](https://github.com/square/leakcanary) - 内存泄露检测工具
-	- [LayoutCast](https://github.com/mmin18/LayoutCast) - 把代码和资源文件的改动直接同步到手机上,应用不需要重启
-	- [chrome://inspect/#devices](chrome://inspect/#devices) - Chome自带调试
-	- [TaoCode](http://code.taobao.org/) - 阿里云提供的SVN代码托管平台
-	- [阿里云Code](https://code.aliyun.com) - 阿里云提供的GIT代码托管平台
-	- [码云](http://git.oschina.net/) - OSChina提供的GIT代码托管平台
 - 干货文章
 	- [神奇的Android Studio Template](http://blog.csdn.net/lmj623565791/article/details/51592043)
 	- [Android Studio自定义模板 写页面竟然可以如此轻松](http://blog.csdn.net/lmj623565791/article/details/51635533)
