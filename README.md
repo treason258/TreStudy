@@ -162,14 +162,12 @@
 
 - 使用：
 	- 在AndroidManifest中声明注册
-- ``` xml
 <service android：name=".TestService">
     <intent-filter>
          <action android：name="android.intent.action.MyService" />
          <category android：name="android.intent.category.DEFAULT" />
     </intent-filter>
 </service>
-```
 
 - 进程内与服务通信
 	- 进程内与服务通信实际就是通过bindService的方式与服务绑定，获取到通信中介Binder实例，然后通过调用这个实例的方法，完成对服务的各种操作。
