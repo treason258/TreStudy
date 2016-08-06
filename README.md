@@ -16,53 +16,53 @@
 	- [系统框架](#系统框架-)
 	- [Activity](#activity-)
 	- [Service](#service-)
-	- [BroadcastReceiver](https://github.com/treason258/TreStudy#broadcastreceiver-)
-	- [ContentProvider](https://github.com/treason258/TreStudy#contentprovider-)
-	- [Intent](https://github.com/treason258/TreStudy#intent-)
-	- [Permission](https://github.com/treason258/TreStudy#permission-)
-	- [Service & Thread](https://github.com/treason258/TreStudy#service--thread-)
-	- [HandlerThread & Thread](https://github.com/treason258/TreStudy#handlerthread--thread-)
-	- [IntentService & Service](https://github.com/treason258/TreStudy#intentservice--service-)
-- [二、Java基础](https://github.com/treason258/TreStudy#二java基础-)
-	- [面向对象三大特征](https://github.com/treason258/TreStudy#面向对象三大特征-)
-	- [Thread](https://github.com/treason258/TreStudy#thread-)
-	- [ExecutorService](https://github.com/treason258/TreStudy#executorservice-)
-	- [线程安全](https://github.com/treason258/TreStudy#线程安全-)
-	- [JVM](https://github.com/treason258/TreStudy#jvm-)
-	- [GC](https://github.com/treason258/TreStudy#gc-)
-	- [对象引用](https://github.com/treason258/TreStudy#对象引用-)
+	- [BroadcastReceiver](#broadcastreceiver-)
+	- [ContentProvider](#contentprovider-)
+	- [Intent](#intent-)
+	- [Permission](#permission-)
+	- [Service & Thread](#service--thread-)
+	- [HandlerThread & Thread](#handlerthread--thread-)
+	- [IntentService & Service](#intentservice--service-)
+- [二、Java基础](#二java基础-)
+	- [面向对象三大特征](#面向对象三大特征-)
+	- [Thread](#thread-)
+	- [ExecutorService](#executorservice-)
+	- [线程安全](#线程安全-)
+	- [JVM](#jvm-)
+	- [GC](#gc-)
+	- [对象引用](#对象引用-)
 	- [堆和栈](#)
 	- [String分析](#)
 	- [List & Queue & Set & Map](#)
 	- [equals & hashCode](#)
 	- [排序算法](#)
-- [三、多线程编程](https://github.com/treason258/TreStudy#三多线程编程-)
+- [三、多线程编程](#三多线程编程-)
 	- [AsyncTask](#)
 	- [Handler机制](#)
-- [四、进程间通信](https://github.com/treason258/TreStudy#四进程间通信-)
-	- [RPC](https://github.com/treason258/TreStudy#rpc-)
-	- [IPC](https://github.com/treason258/TreStudy#ipc-)
-	- [Binder](https://github.com/treason258/TreStudy#binder-)
-	- [Messenger](https://github.com/treason258/TreStudy#messenger-)
-	- [AIDL](https://github.com/treason258/TreStudy#aidl-)
-- [五、图形图像编程](https://github.com/treason258/TreStudy#五图形图像编程-)
+- [四、进程间通信](#四进程间通信-)
+	- [RPC](#rpc-)
+	- [IPC](#ipc-)
+	- [Binder](#binder-)
+	- [Messenger](#messenger-)
+	- [AIDL](#aidl-)
+- [五、图形图像编程](#五图形图像编程-)
 	- [自定义控件](#)
 	- [View & SurfaceView](#)
 	- [onAttach & onMeasure & onLayout & onDraw](#)
 	- [Canvas](#)
 	- [LayoutInflate](#)
 	- [OpenGL](#)
-- [六、文件存储](https://github.com/treason258/TreStudy#六文件存储-)
+- [六、文件存储](#六文件存储-)
 	- [SharedPreferences](#)
 	- [File](#)
 	- [SQLite](#)
-- [七、高性能开发](https://github.com/treason258/TreStudy#七高性能开发-)
+- [七、高性能开发](#七高性能开发-)
 	- [内存溢出和内存泄露](#)
 	- [APP性能优化](#)
 	- [TraceView布局性能优化](#)
 	- [ListView性能优化](#)
 	- [WebView内存泄露问题](#)
-- [八、设计模式](https://github.com/treason258/TreStudy#八设计模式-)
+- [八、设计模式](#八设计模式-)
 	- [单例模式](#)
 	- [适配器模式](#)
 	- [工厂模式](#)
@@ -74,11 +74,11 @@
 	- [建造者模式](#)
 	- [抽象工厂模式](#)
 	- [享元模式](#)
-- [九、源码分析](https://github.com/treason258/TreStudy#九源码分析-)
+- [九、源码分析](#九源码分析-)
 	- [GSON](#)
 	- [Volley](#)
 	- [EventBus](#)
-- [X、其他未归类](https://github.com/treason258/TreStudy#x其他未归类-)
+- [X、其他未归类](#x其他未归类-)
 	- [React Navite](#)
 	- [JNI & NDK](#)
 	- [](#)
@@ -100,7 +100,7 @@
 
 - 应用层：桌面应用、联系人应用、通话应用、浏览器应用
 
-### Activity <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### Activity <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 - 生命周期
 	- onCreate、onStart、onResume
 	- onPause、onSback-top、onDestory
@@ -149,7 +149,7 @@
 		- 然后原始栈执行之前的操作不变，两个栈同时存在。
 		- 比较复杂，需要借助图形。
 
-### Service <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### Service <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 - Service的生命周期可以从两种启动模式开始说起，分别是Context.startService和Context.bindService.
 	- 1、startService启动模式下的生命周期：当首次使用startService启动一个服务时，系统会实例化一个Service实例，依次调用其onCreate和onStartCommand方法，然后进入运行状态。
 此后，如果再使用startService启动服务时，不再创建新的服务对象，系统会自动找到刚才创建的Service实例，调用其onStart方法。
@@ -179,7 +179,7 @@
 - 注：
 	- 与服务绑定是个异步的过程，也就是说绑定成功后下一步操作binder对象，有可能为null。
 
-### BroadcastReceiver <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### BroadcastReceiver <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 广播接收者，用来接收来自系统和应用中的广播
 广播体现的方方面面，例如开机、网路状态变化、电池电量变化都会产生广播，接收广播可以及时的处理一些提示和保存数据等。
 
@@ -207,7 +207,7 @@ android：priority来控制优先级，sendOrderedBroadcast发送有序广播，
 注：
 1、需要权限声明。
 
-### ContentProvider <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### ContentProvider <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 ContentProvider是数据包装器，适合在不同进程间实现信息共享。
 例如Android中SQLite数据库是典型的数据源，我们可以把它封装到ContentProvider中，就可以很好的为其他应用提供信息共享服务。
 其他应用在访问ContentProvider时，可以使用一组类似REST的URI的方式进行数据操作，大大简化了读写信息的复杂度。
@@ -229,44 +229,44 @@ ContentResolver与ContentProvider是对应的关系，正是通过他来与Conte
     android：multiprocess="true" />
 3、读取数据，使用ContentResolver。
 
-### Intent <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### Intent <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### Permission <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### Permission <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### Service & Thread <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### Service & Thread <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### HandlerThread & Thread <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### HandlerThread & Thread <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### IntentService & Service <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### IntentService & Service <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-## 二、Java基础 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="20" width="20"/></a>
+## 二、Java基础 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-### 面向对象三大特征 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### 面向对象三大特征 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### Thread <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### Thread <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### ExecutorService <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### ExecutorService <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### 线程安全 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### 线程安全 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### JVM <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### JVM <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### GC <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### GC <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### 对象引用 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="15" width="15"/></a>
+### 对象引用 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-## 三、多线程编程 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="20" width="20"/></a>
+## 三、多线程编程 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-## 四、进程间通信 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="20" width="20"/></a>
+## 四、进程间通信 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-## 五、图形图像编程 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="20" width="20"/></a>
+## 五、图形图像编程 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-## 六、文件存储 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="20" width="20"/></a>
+## 六、文件存储 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-## 七、高性能开发 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="20" width="20"/></a>
+## 七、高性能开发 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-## 八、设计模式 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="20" width="20"/></a>
+## 八、设计模式 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-## 九、源码分析 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="20" width="20"/></a>
+## 九、源码分析 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-## X、其他未归类 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/back-top.png" height="20" width="20"/></a>
+## X、其他未归类 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
