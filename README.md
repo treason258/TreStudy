@@ -16,6 +16,7 @@
 	- [Service](#service-)
 	- [BroadcastReceiver](#broadcastreceiver-)
 	- [ContentProvider](#contentprovider-)
+	- [Fragment](#fragment-)
 	- [Intent](#intent-)
 	- [Permission](#permission-)
 	- [Service & Thread](#service--thread-)
