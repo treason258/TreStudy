@@ -2,7 +2,7 @@
 
 > 专注于 Android 学习
 >
-> ![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/trec-144.png) 
+> ![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/trec-144.png)
 >
 > [工欲善其事 必先利其器](https://github.com/treason258/TreStudy/blob/master/TOOLS.md)
 >
@@ -83,10 +83,10 @@
 	- [JNI & NDK](#)
 	- [](#)
 
-## 一、Android基础 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="20" width="20"/></a>
+## 一、Android基础 <a href="#目录"><img src="/res/top-50.png" height="20" width="20"/></a>
 
-### 系统框架 <a href="https://github.com/treason258/TreStudy#目录"><img src="https://raw.githubusercontent.com/treason258/TreStudy/master/res/top-50.png" height="15" width="15"/></a> 
-![img](https://raw.githubusercontent.com/treason258/TreStudy/master/res/android-framework.png) 
+### 系统框架 <a href="#目录"><img src="/res/top-50.png" height="15" width="15"/></a>
+![img](/res/android-framework.png)
 
 - 底层部分
 	- Linux内核：进程、线程、电源管理、驱动
