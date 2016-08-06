@@ -8,9 +8,6 @@
 >
 <!-- [个人博客 - mjiayou.com](http://mjiayou.com) -->
 
-edit coordinate
-fuck you
-
 ## 目录：
 
 - [一、Android基础](#一android基础-)
@@ -21,7 +18,7 @@ fuck you
 	- [ContentProvider](#contentprovider-)
 	- [Fragment](#fragment-)
 	- [Intent](#intent-)
-	- [Permission](#permission-)
+	- [permission](#permission-)
 	- [Service & Thread](#service--thread-)
 	- [HandlerThread & Thread](#handlerthread--thread-)
 	- [IntentService & Service](#intentservice--service-)
@@ -33,14 +30,14 @@ fuck you
 	- [JVM](#jvm-)
 	- [GC](#gc-)
 	- [对象引用](#对象引用-)
-	- [堆和栈](#)
-	- [String分析](#)
-	- [List & Queue & Set & Map](#)
-	- [equals & hashCode](#)
-	- [排序算法](#)
+	- [堆和栈](#堆和栈-)
+	- [String分析](#String分析-)
+	- [List & Queue & Set & Map](#list--queue--set--map-)
+	- [equals & hashCode](#equals--hashCode-)
+	- [排序算法](#排序算法-)
 - [三、多线程编程](#三多线程编程-)
-	- [AsyncTask](#)
-	- [Handler机制](#)
+	- [Handler机制](#handler机制-)
+	- [AsyncTask](#asynctask-)
 - [四、进程间通信](#四进程间通信-)
 	- [RPC](#rpc-)
 	- [IPC](#ipc-)
@@ -48,45 +45,45 @@ fuck you
 	- [Messenger](#messenger-)
 	- [AIDL](#aidl-)
 - [五、图形图像编程](#五图形图像编程-)
-	- [自定义控件](#)
-	- [View & SurfaceView](#)
-	- [onAttach & onMeasure & onLayout & onDraw](#)
-	- [Canvas](#)
-	- [LayoutInflate](#)
-	- [Animation](*)
-	- [OpenGL](#)
-- [六、文件存储](#六文件存储-)
-	- [SharedPreferences](#)
-	- [File](#)
-	- [SQLite](#)
-- [七、网络编程](#七网络编程-)
-	- [网络协议](*)
-	- [Socket](*)
-	- [TCP/UDP](*)
-- [八、高性能开发](#八高性能开发-)
-	- [内存溢出和内存泄露](#)
-	- [APP性能优化](#)
-	- [TraceView布局性能优化](#)
-	- [ListView性能优化](#)
-	- [WebView内存泄露问题](#)
+	- [自定义控件](#自定义控件-)
+	- [LayoutInflate](#layoutinflate-)
+	- [onAttach & onMeasure & onLayout & onDraw](#onattach--onmeasure--onlayout--ondraw-)
+	- [Canvas](#canvas-)
+	- [View & SurfaceView](#view--surfaceView-)
+	- [Animation](*animation-)
+	- [OpenGL](#opengl-)
+- [六、高性能开发](#六高性能开发-)
+	- [内存溢出和内存泄露](#内存溢出和内存泄露-)
+	- [APP性能优化](#app性能优化-)
+	- [TraceView性能分析](#TraceView性能分析-)
+	- [ListView性能优化](#listview性能优化-)
+	- [WebView内存泄露分析](#webview内存泄露分析-)
+- [七、文件存储](#七文件存储-)
+	- [SharedPreferences](#sharedpreferences-)
+	- [File](#file-)
+	- [SQLite](#sqlite-)
+- [八、网络编程](#八网络编程-)
+	- [网络协议](#网络协议-)
+	- [Socket](#socket-)
+	- [TCP & UDP](#tcp--udp-)
 - [九、设计模式](#九设计模式-)
-	- [单例模式](#)
-	- [适配器模式](#)
-	- [工厂模式](#)
-	- [代理模式](#)
-	- [观察者模式](#)
-	- [访问者模式](#)
-	- [命令模式](#)
-	- [组合模式](#)
-	- [建造者模式](#)
-	- [抽象工厂模式](#)
-	- [享元模式](#)
+	- [单例模式](#单例模式-)
+	- [适配器模式](#适配器模式-)
+	- [工厂模式](#工厂模式-)
+	- [代理模式](#代理模式-)
+	- [观察者模式](#观察者模式-)
+	- [访问者模式](#访问者模式-)
+	- [命令模式](#命令模式-)
+	- [组合模式](#组合模式-)
+	- [建造者模式](#建造者模式-)
+	- [抽象工厂模式](#抽象工厂模式-)
+	- [享元模式](#享元模式-)
 - [十、源码分析](#十源码分析-)
-	- [GSON](#)
-	- [Volley](#)
-	- [EventBus](#)
+	- [GSON](#gson-)
+	- [Volley](#volley-)
+	- [EventBus](#eventbus-)
 - [X、其他未归类](#x其他未归类-)
-	- [JNI & NDK](#)
+	- [JNI & NDK](#jni--ndk-)
 
 ## 一、Android基础 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
@@ -234,9 +231,11 @@ ContentResolver与ContentProvider是对应的关系，正是通过他来与Conte
     android：multiprocess="true" />
 3、读取数据，使用ContentResolver。
 
+### Fragment <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
 ### Intent <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### Permission <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+### permission <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
 ### Service & Thread <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
@@ -254,23 +253,17 @@ ContentResolver与ContentProvider是对应的关系，正是通过他来与Conte
 
 ### 线程安全 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### JVM <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
-
-### GC <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
-
-### 对象引用 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
-
 ## 三、多线程编程 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
 ## 四、进程间通信 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
 ## 五、图形图像编程 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-## 六、文件存储 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
+## 六、高性能开发 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-## 七、网络编程 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
+## 七、文件存储 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-## 八、高性能开发 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
+## 八、网络编程 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
 ## 九、设计模式 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 

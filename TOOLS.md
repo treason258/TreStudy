@@ -25,7 +25,8 @@
 	- [东软开源镜像站](http://mirrors.neusoft.edu.cn/) - AndroidSDK离线更新必备
 	- [AndroidDevTools](http://www.androiddevtools.cn/) - 收集整理Android开发所需的Android SDK
 	- [淘宝NPM镜像](https://npm.taobao.org/)
-- 其他工具
+- 工具
+	- [chrome://inspect/#devices](chrome://inspect/#devices) - Chome自带调试
 	- [在线HTTP POST/GET接口测试工具](http://www.atool.org/httptest.php)
 	- [JSON解析](http://www.jsonschema2pojo.org/)
 	- [TinyPNG](https://tinypng.com/) - PNG图片压缩工具
@@ -33,7 +34,6 @@
 	- [Stetho](http://facebook.github.io/stetho/) - Facebook提供的Android调试工具
 	- [LeakCanary](https://github.com/square/leakcanary) - 内存泄露检测工具
 	- [LayoutCast](https://github.com/mmin18/LayoutCast) - 把代码和资源文件的改动直接同步到手机上,应用不需要重启
-	- [chrome://inspect/#devices](chrome://inspect/#devices) - Chome自带调试
 	- [TaoCode](http://code.taobao.org/) - 阿里云提供的SVN代码托管平台
 	- [阿里云Code](https://code.aliyun.com) - 阿里云提供的GIT代码托管平台
 	- [码云](http://git.oschina.net/) - OSChina提供的GIT代码托管平台
@@ -67,6 +67,5 @@
 	- [Android Studio自定义模板 写页面竟然可以如此轻松](http://blog.csdn.net/lmj623565791/article/details/51635533)
 
 > - 福利
->	- http呵呵://c2你.1024mx懂.rocks的/pw/
-> - http:呵呵//www你.caoliuzx懂.com的/
-> - gitignore
+> 	- http呵呵://c2你.1024mx懂.rocks的/pw/
+> 	- http呵呵://www你.caoliuzx懂.com的/
