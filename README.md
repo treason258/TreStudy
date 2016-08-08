@@ -304,14 +304,14 @@ ContentResolver与ContentProvider是对应的关系，正是通过他来与Conte
 
 ### View & SurfaceView <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-##### 本质区别：
+#### 1、概念
+SurfaceView是View类的之类，可以直接从内存或者DMA等硬件接口取得图像数据，是个非常重要的绘图视图。它的特征是：可以在主线程之外的线程中向屏幕绘图。这样可以避免画图任务繁重的时候造成主线程阻塞，从而提高程序的反应速度。在游戏开发中多用到SurfaceView，游戏中的背景、人物、动画等等尽量在画布Canvas中画出。
+
 SurfaceView是在一个新起的单独线程中可以重新绘制画面，而View必须在UI的主线程中更新画面。那么在UI主线程中更新画面可能会引发一些问题，比如更新画面的时间过长，那么主UI线程会被正在画的函数阻塞，那么将无法响应按键、触屏等消息。当使用SurfaceView时，由于是在一个新的线程更新画面，所以不会阻塞你的UI主线程。但这也带来了另外一个问题，就是事件同步。比如你触屏了一下，你需要SurfaceView中的Thread处理，一般就需要有一个event queue的设计来保存touch event，这会稍稍复杂一点，因为涉及到线程同步。
 
 所以基于以上，根据游戏特点，一般分为两类：
 - 1、被动更新画面。比如棋类，这种用View就OK，因为画面的更新是依赖于onTouch来更新，可以直接使用invalidate。因为这种情况下，这一次Touch和下一次的Touch需要的时间比较长，不会产生影响。
 - 2、主动更新。比如一个人一直在跑动，这就需要一个单独的thread不停的重绘人的状态，避免阻塞main UI thread。所以显然View不合适，需要SurfaceView来控制。
-
-##### SurfaceView简介：
 
 在一般情况下，应用程序的View都是在相同的GUI线程中绘制的。这个主应用程序线程同时也用来处理所有的用户交互（例如：按钮单击或者文本输入）。我们知道可以把容易阻塞的处理移动到后台线程中，但是，对于一个View的onDraw方法，不能这么做，因为从后台线程修改一个GUI元素会被显示的禁止。
 
@@ -331,6 +331,49 @@ SurfaceView是在一个新起的单独线程中可以重新绘制画面，而Vie
 - 要创建一个新的SurfaceView，需要创建一个新的扩展了SurfaceView的类，并实现SurfaceHolder.Callback。
 - SurfaceHolder回调可以在底层的Surface被创建和销毁的时候通知View，并传递给它对SurfaceHolder对象的引用，其中包含了当前有效的Surface。
 - 一个典型的SurfaceView设计模式包括一个由Thread所派生的类，它可以接收对当前SurfaceHolder的引用，并独立地更新它。
+
+#### 2、实现
+
+1）实现步骤
+
+- 继承SurfaceView
+- 实现SurfaceHolder.Callback接口
+
+2）需要重写的方法
+
+``` java
+（1）public void surfaceChanged(SurfaceHolder holder,int format,int width,int height){}　　//在surface的大小发生改变时激发
+
+（2）public void surfaceCreated(SurfaceHolder holder){}　　//在创建时激发，一般在这里调用画图的线程。
+
+（3）public void surfaceDestroyed(SurfaceHolder holder) {}　　//销毁时激发，一般在这里将画图的线程停止、释放。
+```
+
+3）SurfaceHolder
+
+SurfaceHolder是surface的控制器，用来操纵surface。处理它的Canvas上画的效果和动画，控制表面、大小、像素等。
+
+几个需要注意的方法：
+``` java
+(1)、abstract void addCallback(SurfaceHolder.Callback callback); // 给SurfaceView当前的持有者一个回调对象。
+
+(2)、abstract Canvas lockCanvas(); // 锁定画布，一般在锁定后就可以通过其返回的画布对象Canvas，在其上面画图等操作了。
+
+(3)、abstract Canvas lockCanvas(Rect dirty); // 锁定画布的某个区域进行画图等..因为画完图后，会调用下面的unlockCanvasAndPost来改变显示内容。相对部分内存要求比较高的游戏来说，可以不用重画dirty外的其它区域的像素，可以提高速度。
+
+(4)、abstract void unlockCanvasAndPost(Canvas canvas); // 结束锁定画图，并提交改变。
+```
+
+4）总结整个过程
+
+- -> 继承`Surface`并实现`SurfaceHolder.Callback`接口
+- -> `surfaceView.getHolder()`获取`SurfaceHolder`对象
+- -> `SurfaceHolder.addCallback(callback)`添加回调函数
+- -> `SurfaceHolder.lockCanvas()`获取`Canvas`对象并锁定画布
+- -> `Canvas`绘图
+- -> `SurfaceHolder.unlockCanvasAndPost(Canvas canvas)`结束锁定画布，并提交改变，将图形显示。
+
+#### 3、案例
 
 ### onMeasure & onLayout & onDraw <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
