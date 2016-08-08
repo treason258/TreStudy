@@ -31,28 +31,28 @@
 	- [GC](#gc-)
 	- [对象引用](#对象引用-)
 	- [堆和栈](#堆和栈-)
+	- [排序算法](#排序算法-)
 	- [String分析](#String分析-)
 	- [List & Queue & Set & Map](#list--queue--set--map-)
 	- [equals & hashCode](#equals--hashCode-)
-	- [排序算法](#排序算法-)
 - [三、多线程编程](#三多线程编程-)
 	- [Handler机制](#handler机制-)
 	- [AsyncTask](#asynctask-)
 - [四、进程间通信](#四进程间通信-)
 	- [RPC](#rpc-)
 	- [IPC](#ipc-)
+	- [AIDL](#aidl-)
 	- [Binder](#binder-)
 	- [Messenger](#messenger-)
-	- [AIDL](#aidl-)
 - [五、图形图像编程](#五图形图像编程-)
 	- [自定义控件](#自定义控件-)
 	- [LayoutInflate](#layoutinflate-)
-	- [onAttach & onMeasure & onLayout & onDraw](#onattach--onmeasure--onlayout--ondraw-)
 	- [Canvas](#canvas-)
-	- [View & SurfaceView](#view--surfaceView-)
 	- [Animation](#animation-)
 	- [Shader](#shader-)
 	- [OpenGL](#opengl-)
+	- [View & SurfaceView](#view--surfaceView-)
+	- [onMeasure & onLayout & onDraw](#onmeasure--onlayout--ondraw-)
 - [六、高性能开发](#六高性能开发-)
 	- [内存溢出和内存泄露](#内存溢出和内存泄露-)
 	- [APP性能优化](#app性能优化-)
@@ -80,7 +80,7 @@
 	- [抽象工厂模式](#抽象工厂模式-)
 	- [享元模式](#享元模式-)
 - [十、源码分析](#十源码分析-)
-	- [GSON](#gson-)
+	- [Gson](#gson-)
 	- [Volley](#volley-)
 	- [EventBus](#eventbus-)
 - [X、其他未归类](#x其他未归类-)
@@ -254,20 +254,128 @@ ContentResolver与ContentProvider是对应的关系，正是通过他来与Conte
 
 ### 线程安全 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
+### JVM <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### GC <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### 对象引用 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### 堆和栈 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### 排序算法 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### String分析 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### List & Queue & Set & Map <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### equals & hashCode <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
 ## 三、多线程编程 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
+
+### Handler机制 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### AsyncTask <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
 ## 四、进程间通信 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
+### RPC <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### IPC <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### AIDL <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### Binder <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### Messenger <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
 ## 五、图形图像编程 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
+
+### 自定义控件 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### LayoutInflate <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### Canvas <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### Animation <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### Shader <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### OpenGL <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### View & SurfaceView <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+##### 本质区别：
+SurfaceView是在一个新起的单独线程中可以重新绘制画面，而View必须在UI的主线程中更新画面。那么在UI主线程中更新画面可能会引发一些问题，比如更新画面的时间过长，那么主UI线程会被正在画的函数阻塞，那么将无法响应按键、触屏等消息。当使用SurfaceView时，由于是在一个新的线程更新画面，所以不会阻塞你的UI主线程。但这也带来了另外一个问题，就是事件同步。比如你触屏了一下，你需要SurfaceView中的Thread处理，一般就需要有一个event queue的设计来保存touch event，这会稍稍复杂一点，因为涉及到线程同步。
+
+所以基于以上，根据游戏特点，一般分为两类：
+- 1、被动更新画面。比如棋类，这种用View就OK，因为画面的更新是依赖于onTouch来更新，可以直接使用invalidate。因为这种情况下，这一次Touch和下一次的Touch需要的时间比较长，不会产生影响。
+- 2、主动更新。比如一个人一直在跑动，这就需要一个单独的thread不停的重绘人的状态，避免阻塞main UI thread。所以显然View不合适，需要SurfaceView来控制。
+
+##### SurfaceView简介：
+
+在一般情况下，应用程序的View都是在相同的GUI线程中绘制的。这个主应用程序线程同时也用来处理所有的用户交互（例如：按钮单击或者文本输入）。我们知道可以把容易阻塞的处理移动到后台线程中，但是，对于一个View的onDraw方法，不能这么做，因为从后台线程修改一个GUI元素会被显示的禁止。
+
+当需要快速的更新View的UI，或者当渲染代码阻塞GUI线程的时间过长的时候，SurfaceView就是解决上述问题的最佳选择。SurfaceView封装了一个Surface对象，而不是Canvas。这一点很重要，因为Surface可以使用后台线程绘制。对于那些资源敏感的操作，或者那些要求快速更新或者高速帧率的地方，例如使用3D图形，创建游戏，或者实时预览摄像头，这一点特别有用。
+
+独立于GUI线程进行绘图的代价是额外的内存消耗，所以，虽然它是创建定制的View的有效方式（有时甚至是必须的），但是使用SurfaceView的时候仍然需要保持谨慎。
+
+1、何时应该使用SurfaceView？
+
+- SurfaceView使用的方式和任何View所派生的类都是完全相同的。可以像其他View那样应用动画，并把它们放在布局中。
+- SurfaceView封装的Surface支持所有标准Canvas方法进行绘图，同时也支持完全的OpenGL  ES库。
+- 使用OpenGL，你可以在Surface上绘制任何支持的2D或者3D对象，与在2D画布上模拟相同的效果对象，这种方法可以依靠硬件加速（可用的时候）来极大的提高性能。
+- 对于显示动态的3D图像来说，例如，那些使用Google Earth功能的应用程序，或者那些提供沉浸体验的交互游戏，SurfaceView特别有用。它还是实时显示摄像头预览的最佳选择。
+
+2、如何创建一个新的SurfaceView控件？
+
+- 要创建一个新的SurfaceView，需要创建一个新的扩展了SurfaceView的类，并实现SurfaceHolder.Callback。
+- SurfaceHolder回调可以在底层的Surface被创建和销毁的时候通知View，并传递给它对SurfaceHolder对象的引用，其中包含了当前有效的Surface。
+- 一个典型的SurfaceView设计模式包括一个由Thread所派生的类，它可以接收对当前SurfaceHolder的引用，并独立地更新它。
+
+### onMeasure & onLayout & onDraw <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
 ## 六、高性能开发 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
+### 内存溢出和内存泄露 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### APP性能优化 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### TraceView性能分析 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### ListView性能优化 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### WebView内存泄露分析 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
 ## 七、文件存储 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
+
+### SharedPreferences <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### File <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### SQLite <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
 ## 八、网络编程 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
+### 网络协议 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### Socket <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### TCP & UDP <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
 ## 九、设计模式 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
+
+### 单例模式 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### 适配器模式 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
 ## 十、源码分析 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
+### Gson <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### Volley <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### EventBus <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
 ## X、其他未归类 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
+
+### JNI & NDK <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
