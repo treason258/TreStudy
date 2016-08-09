@@ -53,6 +53,7 @@
 	- [OpenGL](#opengl-)
 	- [View & SurfaceView](#view--surfaceview-)
 	- [onMeasure & onLayout & onDraw](#onmeasure--onlayout--ondraw-)
+	- [onTouch事件分发机制](#ontouch事件分发机制-)
 - [六、高性能开发](#六高性能开发-)
 	- [内存溢出和内存泄露](#内存溢出和内存泄露-)
 	- [APP性能优化](#app性能优化-)
@@ -321,16 +322,16 @@ SurfaceView是在一个新起的单独线程中可以重新绘制画面，而Vie
 
 1、何时应该使用SurfaceView？
 
-- SurfaceView使用的方式和任何View所派生的类都是完全相同的。可以像其他View那样应用动画，并把它们放在布局中。
-- SurfaceView封装的Surface支持所有标准Canvas方法进行绘图，同时也支持完全的OpenGL  ES库。
-- 使用OpenGL，你可以在Surface上绘制任何支持的2D或者3D对象，与在2D画布上模拟相同的效果对象，这种方法可以依靠硬件加速（可用的时候）来极大的提高性能。
-- 对于显示动态的3D图像来说，例如，那些使用Google Earth功能的应用程序，或者那些提供沉浸体验的交互游戏，SurfaceView特别有用。它还是实时显示摄像头预览的最佳选择。
+- `SurfaceView`使用的方式和任何`View`所派生的类都是完全相同的。可以像其他View那样应用动画，并把它们放在布局中。
+- `SurfaceView`封装的`Surface`支持所有标准`Canvas`方法进行绘图，同时也支持完全的`OpenGL ES`库。
+- 使用`OpenGL`，你可以在`Surface`上绘制任何支持的2D或者3D对象，与在2D画布上模拟相同的效果对象，这种方法可以依靠硬件加速（可用的时候）来极大的提高性能。
+- 对于显示动态的3D图像来说，例如，那些使用Google Earth功能的应用程序，或者那些提供沉浸体验的交互游戏，`SurfaceView`特别有用。它还是实时显示摄像头预览的最佳选择。
 
 2、如何创建一个新的SurfaceView控件？
 
-- 要创建一个新的SurfaceView，需要创建一个新的扩展了SurfaceView的类，并实现SurfaceHolder.Callback。
-- SurfaceHolder回调可以在底层的Surface被创建和销毁的时候通知View，并传递给它对SurfaceHolder对象的引用，其中包含了当前有效的Surface。
-- 一个典型的SurfaceView设计模式包括一个由Thread所派生的类，它可以接收对当前SurfaceHolder的引用，并独立地更新它。
+- 要创建一个新的`SurfaceView`，需要创建一个新的扩展了`SurfaceView`的类，并实现`SurfaceHolder.Callback`。
+- `SurfaceHolder`回调可以在底层的`Surface`被创建和销毁的时候通知`View`，并传递给它对`SurfaceHolder`对象的引用，其中包含了当前有效的`Surface`。
+- 一个典型的`SurfaceView`设计模式包括一个由`Thread`所派生的类，它可以接收对当前`SurfaceHolder`的引用，并独立地更新它。
 
 #### 2、实现
 
@@ -342,11 +343,11 @@ SurfaceView是在一个新起的单独线程中可以重新绘制画面，而Vie
 2）需要重写的方法
 
 ``` java
-（1）public void surfaceChanged(SurfaceHolder holder,int format,int width,int height){}　　//在surface的大小发生改变时激发
+public void surfaceChanged(SurfaceHolder holder,int format,int width,int height){}　　//在surface的大小发生改变时激发
 
-（2）public void surfaceCreated(SurfaceHolder holder){}　　//在创建时激发，一般在这里调用画图的线程。
+public void surfaceCreated(SurfaceHolder holder){}　　//在创建时激发，一般在这里调用画图的线程。
 
-（3）public void surfaceDestroyed(SurfaceHolder holder) {}　　//销毁时激发，一般在这里将画图的线程停止、释放。
+public void surfaceDestroyed(SurfaceHolder holder) {}　　//销毁时激发，一般在这里将画图的线程停止、释放。
 ```
 
 3）SurfaceHolder
@@ -355,13 +356,13 @@ SurfaceHolder是surface的控制器，用来操纵surface。处理它的Canvas�
 
 几个需要注意的方法：
 ``` java
-(1)、abstract void addCallback(SurfaceHolder.Callback callback); // 给SurfaceView当前的持有者一个回调对象。
+abstract void addCallback(SurfaceHolder.Callback callback); // 给SurfaceView当前的持有者一个回调对象。
 
-(2)、abstract Canvas lockCanvas(); // 锁定画布，一般在锁定后就可以通过其返回的画布对象Canvas，在其上面画图等操作了。
+abstract Canvas lockCanvas(); // 锁定画布，一般在锁定后就可以通过其返回的画布对象Canvas，在其上面画图等操作了。
 
-(3)、abstract Canvas lockCanvas(Rect dirty); // 锁定画布的某个区域进行画图等..因为画完图后，会调用下面的unlockCanvasAndPost来改变显示内容。相对部分内存要求比较高的游戏来说，可以不用重画dirty外的其它区域的像素，可以提高速度。
+abstract Canvas lockCanvas(Rect dirty); // 锁定画布的某个区域进行画图等..因为画完图后，会调用下面的unlockCanvasAndPost来改变显示内容。相对部分内存要求比较高的游戏来说，可以不用重画dirty外的其它区域的像素，可以提高速度。
 
-(4)、abstract void unlockCanvasAndPost(Canvas canvas); // 结束锁定画图，并提交改变。
+abstract void unlockCanvasAndPost(Canvas canvas); // 结束锁定画图，并提交改变。
 ```
 
 4）总结整个过程
@@ -376,6 +377,160 @@ SurfaceHolder是surface的控制器，用来操纵surface。处理它的Canvas�
 #### 3、案例
 
 ### onMeasure & onLayout & onDraw <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### onTouch事件分发机制 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+#### 主要流程
+
+触摸控件`View`首先执行`dispatchTouchEvent()`方法。
+
+在`dispatchTouchEvent()`方法中首先执行`onTouch()`方法，然后执行`onTouchEvent()`方法，其中包括`onClick()`，后面详解，其中`dispatchTouchEvent()`关键代码如下：
+
+``` java
+public boolean dispatchTouchEvent(MotionEvent event) {
+	......
+	boolean result = false;
+	......
+	if (onFilterTouchEventForSecurity(event)) {
+	    //noinspection SimplifiableIfStatement
+	    ListenerInfo li = mListenerInfo;
+	    if (li != null && li.mOnTouchListener != null
+	            && (mViewFlags & ENABLED_MASK) == ENABLED
+	            && li.mOnTouchListener.onTouch(this, event)) {
+	        result = true;
+	    }
+
+	    if (!result && onTouchEvent(event)) {
+	        result = true;
+	    }
+	}
+	......
+	return result;
+}
+```
+
+源码解读：
+
+- **如果** `View`的`mOnTouchListener!=null`（`View`设置了`setOnTouchListener()`方法） **并且** `View`是`enable`（按钮控件默认都是enable的）**的情况下** 会调用`onTouch()`方法：
+ 	- **如果** `onTouch()`返回`false`，**则** 跳出`if`继续执行，调用`onTouchEvent()`，最终`dispatchTouchEvent()`方法的返回结果和`onTouchEvent()`返回一样。
+ 	- **如果** `onTouch()`返回`true`，**则** 得到`result=true`，则不会执行`onTouchEvent()`方法，最终`dispatchTouchEvent()`方法返回true。
+
+- **如果** `View`的`mOnTouchListener==null`（`View`没有设置`setOnTouchListener()`方法）**或者** `View`不是`enable`（比如非按钮控件），**则** 不会执行`onTouch()`方法，**则** 跳出`if`继续执行，调用`onTouchEvent()`，最终`dispatchTouchEvent()`方法的返回结果和`onTouchEvent()`返回一样。
+
+- 当`dispatchTouchEvent()`在进行事件分发的时候，只有前一个`action`返回`true`，才会触发下一个action。
+
+然后`onTouchEvent()`关键代码如下：
+```java
+public boolean onTouchEvent(MotionEvent event) {
+    ......
+    final int viewFlags = mViewFlags;
+    final int action = event.getAction();
+
+    if ((viewFlags & ENABLED_MASK) == DISABLED) {
+        if (action == MotionEvent.ACTION_UP && (mPrivateFlags & PFLAG_PRESSED) != 0) {
+            setPressed(false);
+        }
+        // A disabled view that is clickable still consumes the touch
+        // events, it just doesn't respond to them.
+        return (((viewFlags & CLICKABLE) == CLICKABLE
+                || (viewFlags & LONG_CLICKABLE) == LONG_CLICKABLE)
+                || (viewFlags & CONTEXT_CLICKABLE) == CONTEXT_CLICKABLE);
+    }
+	......
+    if (((viewFlags & CLICKABLE) == CLICKABLE ||
+            (viewFlags & LONG_CLICKABLE) == LONG_CLICKABLE) ||
+            (viewFlags & CONTEXT_CLICKABLE) == CONTEXT_CLICKABLE) {
+        switch (action) {
+            case MotionEvent.ACTION_UP:
+                boolean prepressed = (mPrivateFlags & PFLAG_PREPRESSED) != 0;
+                if ((mPrivateFlags & PFLAG_PRESSED) != 0 || prepressed) {
+                    ......
+                    if (!mHasPerformedLongPress && !mIgnoreNextUpEvent) {
+                        // This is a tap, so remove the longpress check
+                        removeLongPressCallback();
+
+                        // Only perform take click actions if we were in the pressed state
+                        if (!focusTaken) {
+                            // Use a Runnable and post this rather than calling
+                            // performClick directly. This lets other visual state
+                            // of the view update before click actions start.
+                            if (mPerformClick == null) {
+                                mPerformClick = new PerformClick();
+                            }
+                            if (!post(mPerformClick)) {
+                                performClick();
+                            }
+                        }
+                    }
+                    ......
+                }
+                mIgnoreNextUpEvent = false;
+                break;
+            case MotionEvent.ACTION_DOWN:
+                ......
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                ......
+                break;
+            case MotionEvent.ACTION_MOVE:
+                ......
+                break;
+        }
+        return true;
+    }
+    return false;
+}
+```
+
+源码解读：
+- **如果** `View`是`disenable`状态（`enable`和`clickable`属性可以通过`Java`或者`xml`直接设置）：
+	- **如果** `View`是`clickable`，**则** `onTouchEvent`直接消费事件，返回`true`。
+	- **如果** `View`是`disclickable`，**则** `onTouchEvent`直接消费事件，返回`false`。
+- **如果** `View`是`enable`状态：
+	- **如果** `View`是`clickable`，**则** 进入`event.getAction()`的`switch()`判断中，但是最终`onTouchEvent()`都会返回`true`。`switch()`的`ACTION_DOWN`和`ACTION_MOVE`都进行了一些必要的设置和置位，接着手抬起来`ACTION_UP`时，首先判断了是否按下过，同时是不是可以获取焦点，然后尝试获取焦点，然后判断如果不是`longPressed`则通过`post`在`UI线程`中执行一个叫`PerformClick`的`Runnable`，其中`run()`执行的也就是`performClick()`方法，后面详解。
+	- **如果** `View`是`disclickable`，**则** `onTouchEvent`直接消费事件，返回`false`。
+
+然后`performClick()`关键代码如下：
+
+```java
+public boolean performClick() {
+		final boolean result;
+		final ListenerInfo li = mListenerInfo;
+		if (li != null && li.mOnClickListener != null) {
+				playSoundEffect(SoundEffectConstants.CLICK);
+				li.mOnClickListener.onClick(this);
+				result = true;
+		} else {
+				result = false;
+		}
+
+		sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
+		return result;
+}
+```
+
+源码解读：
+
+- **如果** `li.mOnClickListener!=null`（`View`设置了`setOnClickListener()`方法），**则** 执行`onClick()`方法。
+
+另外看一下`setOnClickListener()`的关键代码：
+
+```java
+public void setOnClickListener(@Nullable OnClickListener l) {
+    if (!isClickable()) {
+        setClickable(true);
+    }
+    getListenerInfo().mOnClickListener = l;
+}
+```
+
+可以看到，只要调用`setOnClickListener()`方法设置监听，如果控件是`disclickable`的话，则会自动给设置成`clickable`。
+
+至此，整个流程走完，整理一下：
+- -> `dispatchTouchEvent()`
+- -> `onTouch()`
+- -> `onTouchEvent()`
+- -> `onClick()`
 
 ## 六、高性能开发 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
