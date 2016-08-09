@@ -53,7 +53,7 @@
 	- [OpenGL](#opengl-)
 	- [View & SurfaceView](#view--surfaceview-)
 	- [onMeasure & onLayout & onDraw](#onmeasure--onlayout--ondraw-)
-	- [onTouch事件分发机制](#ontouch事件分发机制-)
+	- [View事件分发机制](#view事件分发机制-)
 - [六、高性能开发](#六高性能开发-)
 	- [内存溢出和内存泄露](#内存溢出和内存泄露-)
 	- [APP性能优化](#app性能优化-)
@@ -378,7 +378,7 @@ abstract void unlockCanvasAndPost(Canvas canvas); // 结束锁定画图，并提
 
 ### onMeasure & onLayout & onDraw <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### onTouch事件分发机制 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+### View事件分发机制 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
 #### 主要流程
 
