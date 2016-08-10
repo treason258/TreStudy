@@ -420,6 +420,7 @@ public boolean dispatchTouchEvent(MotionEvent event) {
 - 当`dispatchTouchEvent()`在进行事件分发的时候，只有前一个`action`返回`true`，才会触发下一个action。
 
 然后`onTouchEvent()`关键代码如下：
+
 ```java
 public boolean onTouchEvent(MotionEvent event) {
     ......
