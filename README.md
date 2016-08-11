@@ -36,7 +36,7 @@
 	- [List & Queue & Set & Map](#list--queue--set--map-)
 	- [equals & hashCode](#equals--hashcode-)
 - [三、多线程编程](#三多线程编程-)
-	- [Handler机制](#handler机制-)
+	- [Handler异步事件处理机制](#handler异步事件处理机制-)
 	- [AsyncTask](#asynctask-)
 - [四、进程间通信](#四进程间通信-)
 	- [RPC](#rpc-)
@@ -53,7 +53,8 @@
 	- [OpenGL](#opengl-)
 	- [View & SurfaceView](#view--surfaceview-)
 	- [onMeasure & onLayout & onDraw](#onmeasure--onlayout--ondraw-)
-	- [View事件分发机制](#view事件分发机制-)
+	- [Touch事件分发机制](#touch事件分发机制-)
+	- [View绘制流程](#view绘制流程-)
 - [六、高性能开发](#六高性能开发-)
 	- [内存溢出和内存泄露](#内存溢出和内存泄露-)
 	- [APP性能优化](#app性能优化-)
@@ -86,6 +87,7 @@
 	- [EventBus](#eventbus-)
 - [X、其他未归类](#x其他未归类-)
 	- [JNI & NDK](#jni--ndk-)
+	- [Java & JS](#java--js-)
 
 ## 一、Android基础 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
@@ -170,12 +172,15 @@
 
 - 使用：
 	- 在AndroidManifest中声明注册
+
+```xml
 <service android：name=".TestService">
     <intent-filter>
          <action android：name="android.intent.action.MyService" />
          <category android：name="android.intent.category.DEFAULT" />
     </intent-filter>
 </service>
+```
 
 - 进程内与服务通信
 	- 进程内与服务通信实际就是通过bindService的方式与服务绑定，获取到通信中介Binder实例，然后通过调用这个实例的方法，完成对服务的各种操作。
@@ -269,13 +274,110 @@ ContentResolver与ContentProvider是对应的关系，正是通过他来与Conte
 
 ### List & Queue & Set & Map <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
+http://blog.csdn.net/defonds/article/details/47951103
+
+- List 提供一个有序且有索引的容器，允许重复值的出现；
+	- ArrayList
+	- LinkedList
+- Set 提供一个无序的唯一对象的容易，不允许重复值；
+	- LinkedHashSet
+	- TreeSet
+	- HashSet
+- Map 提供一个基于键值对以及哈希的数据结构；
+	- HashMap
+
+- 重复对象：List和Set接口最主要的区别就是在于List允许有重复对象，而Set不允许你重复对象。所有的Set都必须遵循着一约束，Map的每个Entry都持有两个对象，也就是一个键一个值，Map可能会持有相同的值对象，但键对象必须是唯一的。
+- 排序：List和Set接口的另一个关键区别就是List是一个有序容器，List保持了每个元素的插入顺序。Set是个无序容器，无法保证每个元素的存储顺序。但是某些Set比如LinkedHashSet还是保持了每个元素的插入顺序。此外TreeSet和TreeMap也通过Comparator或者Comparable维护了一个排序顺序呢。
+- 空元素：List允许空元素，Set也允许空，Map也允许空。值得注意的是，Hashtable即不允许null键也不允许null值。但HashMap允许任意数量的null值和最多一个null键。
+- 流行实现：
+
+- 如果使用索引对元素进行访问，那么List；
+- 如果需要按照插入次序有序存储，那么List；
+- 如果想保证插入数据唯一性，那么Set；
+- 如果以键值对的形式进行数据存储，那么Map；
+
+ArrayList $ LinkedList & Vector
+- ArrayList 是一个数组队列，相当于动态数组，由数组实现，随意访问率高，但随机插入、随即删除效率低；
+- LinkedList 是一个双链表，可以当做堆栈、队列或双端队列进行操作，随即访问率低，但随即插入、随即删除消息高。
+- Vector 是矢量队列，和ArrayList一样，它也是一个动态数组，由数组实现。但是ArrayList是非线程安全的，而Vector是线程安全的。
+
+HashMap & LinkedHashMap & TreeMap
+- HashMap 里面存入的键值对在取出的时候是随即的，根据键的hashCode值进行数据存储，根据键可以直接取出它的值，具有很快的访问速度。在Map中插入、删除和定位元素，HashMap值最好的选择。
+- TreeMap 取出来的是排序后的键值对。如果要按照自然排序或者自定义顺序遍历键，那么TreeMap会更好。
+- LinkedHashMap 是HashMap的一个子类，如果需要输出的顺序和输入的顺序相同，那么用LinkedHashMap可以实现。
+
 ### equals & hashCode <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
 ## 三、多线程编程 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
-### Handler机制 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+### Handler异步事件处理机制 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+总结：
+
+- Handler与Looper：
+	- 在主线程中可以直接创建Handler对象，而在子线程中需要先调用Looper.prepare才能创建Handler对象，否则会抛异常；
+	- 每个线程中最多只能有一个Looper对象；
+	- 可以通过Looper.myLooper获取当前线程的Looper实例，通过Looper.getMainLooper获取主UI线程的Looper实例；
+	- 一个Looper只能对应一个MessageQueue；
+	- 一个线程中只有一个Looper实例，一个MessageQueue实例，可以有多个Handler实例；
+
+- Looper.prepare创建了一个MessageQueue；
+- 通过Handler发送消息实质就是把消息Message添加到MessageQueue消息队列中的过程；
+- 然后通过Looper.loop方法，然后遍历MessageQueue的next不断的把消息出队；
+- 当有一个消息出队，就将它传递到dispatchMessage方法，执行message.target的handleMessage；
+- 会不断循环，直到调用Looper.quit方法，实质就是调用了MessageQueue消息队列的quit方法；
+
+- 一些优化分析：
+	- new Message对象的时候尽量使用Message.obtain，他其实是从Message池中返回了一个新的Message实例，能避免创建新的对象，从而减少内存的开销。
+	- 使用内部类创建来创建Handler的时候，Handler对象会隐式的持有一个外部类对象（通常是Activity）的引用。而Handler通常会伴随一个耗时的后台线程一起出现，这个后台线程在任务执行完毕之后，通过消息机制通知Handler，然后Handler把消息发送到UI线程。然而用户在耗时线程执行过程中关闭了Activity，正常情况Activity不再被使用，就应该被GC检查的时候被回收掉，但是由于这个线程尚未执行完，而该线程持有Handler的引用，而Handler又持有Activity的引用，就导致Activity暂时无法被回收。
+	- 解决：
+		- 1、通过逻辑保护，在关闭Activity的时候停掉后台进程，或者使用Handler的removeCallbacks方法，把消息对象从消息队列中移除。
+		- 2、将Handler声明为静态类。静态类不持有外部类的引用，但是这样就不能再Handler中操作Activity对象了，所以需要在Handler中增加一个Activity的弱引用WeakReference。
+
+	- HandlerThread其实就是Thread、Looper、Hander的组合实现，主要是对Looper进行初始化，并提供一个Looper对象给新创建的Handler对象，使得Handler处理消息事件在子线程中处理。
+	- 使用HandlerThread必须在
+
+	```java
+	mHandlerThread = new HandlerThread("HandlerWorkThread");
+  //必须在实例化mThreadHandler之前调运start方法，原因上面源码已经分析了
+  mHandlerThread.start();
+  //将当前mHandlerThread子线程的Looper传入mThreadHandler，使得
+  //mThreadHandler的消息队列依赖于子线程（在子线程中执行）
+  mThreadHandler = new Handler(mHandlerThread.getLooper()) {
+      @Override
+      public void handleMessage(Message msg) {
+          super.handleMessage(msg);
+          Log.i(null, "在子线程中处理！id="+Thread.currentThread().getId());
+          //从子线程往主线程发送消息
+          mUiHandler.sendEmptyMessage(0);
+      }
+  };
+	```
 
 ### AsyncTask <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+总结：
+
+- 使用AsyncTask可以实现异步处理，其实也是Thread和Handler组合实现，因为其内部使用了Java提供的线程池技术，有效的降低了线程创建数量及限定了同事运行的线程数，还有一些针对性的对线程池的优化操作。使用步骤：
+	- 继承AsyncTask，三个参数分别是：
+		- Void 在执行AsyncTask时需要传入的参数，可用于在后台任务中使用；
+		- Integer 后台任务执行时，如果需要在界面上显示当前的进度，则使用这个；
+		- Boolean 当任务执行完毕后，如果需要对结果进行返回，则使用这个；
+	- 重写onPreExecute，用于一些初始化操作；
+	- 重写doInBackgroud，这个方法中的所有代码都会在子线程中运行，我们应该在这里处理耗时操作；
+	- 重写onProgressUpdate，当后台任务中调用了publishProgress方法，就会调用这个方法；
+	- 重写onPostExecute，当后台任务执行完毕并通过reture语句返回时，这个方法就很快被调用；
+	- 执行execute方法；
+
+源码分析：
+
+- execute执行之后，首先就调用了onPreExecute；
+- AsyncTask会有个常量叫SerialExecutor，这个SerialExecutor是使用队列的形式管理Runnable对象；
+- 实质上是一个线程池中执行，线程池的默认容量和最大容量都和CPU的个数有关；
+- 有个子线程的WorkerRunnable，在这里调用doInBackgroud；
+- 然后postResult的形式WorkerRunnable对象再通过Message的形式send回主线程：
+	- 如果正在执行中，调用onProgressUpdate；
+	- 如果执行完毕，调用finish，finish调用onPostExecute；
 
 ## 四、进程间通信 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
@@ -378,7 +480,7 @@ abstract void unlockCanvasAndPost(Canvas canvas); // 结束锁定画图，并提
 
 ### onMeasure & onLayout & onDraw <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
-### View事件分发机制 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+### Touch事件分发机制 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
 #### 主要流程
 
@@ -533,6 +635,44 @@ public void setOnClickListener(@Nullable OnClickListener l) {
 - -> `onTouchEvent()`
 - -> `onClick()`
 
+整体总结：
+- -> 用户点击屏幕任意，首先触发Activity的dispatchTouchEvent()，如果是ACTION_DOWN，则触发onUserInteraction()；
+- -> 然后Activity的dispatchTouchEvent()其实就是调用DecorView的dispatchTouchEvent()，即走到了根节点ViewGroup的dispatchTouchEvent()；
+- -> 然后会依次下发，下发的过程是调用View(ViewGroup)的dispatchTouchEvent()方法实现的。简单的说就是ViewGroup遍历它包含的子View，调用每个View的dispatchTouchEvent()方法，而当子View为ViewGroup时，又会通过调用ViewGroup的dispatchTouchEvent()方法继续调用其内部的View的dispatchTouchEvent()方法。
+- -> 其中dispatchTouchEvent()方法只负责事件的分发，它拥有boolean类型的返回值，当返回true时，顺序下发会中断。
+- -> View的dispatchTouchEvent()方法调用onTouch()，根据其返回值决定是否执行onTouchEvent()，在onTouchEvent()中调用onClick()；
+- -> ViewGroup多了一个onInterceptTouchEvent()，它在ViewGroup的dispatchTouchEvent()中起到作用，根据返回值来决定下发是否会中断。
+
+### View绘制流程 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+整体总结：
+
+- 整个View的绘图流程是在ViewRootImpl类的performTraversals()方法开始的。
+- 递归measure：为整个View树计算实际的大小，然后设置实际的高和宽，每个View控件的实际宽高都是由父视图和自身决定的。实际的测量是在onMeasure方法进行，所以在View的子类需要重写onMeasure方法。
+	- measure过程主要就是从顶层父View向子View递归调用view.measure方法的过程（measure又回调onMeasure方法），具体measure核心主要有如下几点：
+	-	MeasureSpec（View的内部类）测量规格为int，值由高2位规格模式specMode和低30位具体的specSize组成。其中specMode只有三种值：EXACTLY、AT_MOST、UNSPECIFIED。
+- 递归layout：layout方法接收四个参数，分别代表左、上、右、下。
+	- layout过程也是从顶层父View向子View的递归调用view.layout方法的过程，即父View根据上一步measure子View所得到的布局大小和布局参数，将子View放在合适的位置。
+	- measure操作完成后得到的是对每个View经测量过的measureWidth和measureHeight，layout操作完成后得到的是对每个View进行位置分配后的mLeft、mTop、mRight、mBottom，这些值都是相对于父View来说的。
+	- 使用View的getWidth和getHeight方法来获取View测量的宽高，必须保证这两个方法在onLayout流程之后被调用才能返回有效值。
+- 递归draw：绘制过程就是把View对象绘制到屏幕上。
+	- 如果View是一个ViewGroup，则需要递归绘制其所包含的所有子View。
+	- View默认不会绘制任何内容，真正的绘制都需要在自己的子类中实现。
+	- View的绘制是借助onDraw方法传入的Canvas类来进行的。
+	- 区分View动画和ViewGroup动画：前者指的是View自身的动画，可以通过setAnimation添加；后者是专门针对ViewGroup现实内部子视图时设置的动画，可以在xml布局文件中对ViewGroup设置layoutAnimation属性。
+
+- View的invalidate和postInvalidate方法：
+	- View的invilidate方法是将要刷新区域直接传递给了父ViewGroup好的invalidateChild方法，在invalidate中，调用父View的invalidateChild，这是一个从当前向父View回溯的过程，每一层的父View都将自己的显示的区域传递给父View进行绘制。
+	- invalidate系列方法请求重回View树，如果View大小没有发生变化就不会调用layout过程，并且只绘制那些需要重绘的View。
+	- invalidate调用的invalidateChild最终会调用到scheduleTraversals，scheduleTraversals通过Handler的Runnable发送一个异步消息，调用doTraversal方法，然后最终调用performTraversals执行绘制。
+	- invalidate只能在UI Thread中执行，其他线程中需要使用postInvalidate方法。实质就是通过发送异步消息，又在UI Thread中调用了View的invalidate方法。
+
+- View的requestLayout方法：
+	- 出发View的requestLayout时实质就是层层向上传递，知道ViewRootImpl为止，然后出发ViewRootImpl的requestLayout方法；
+	- requestLayout方法会调用measure过程和layout过程，不会调用draw过程，也不会绘制任何View，包括该调用者本身；
+
+
+
 ## 六、高性能开发 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
 ### 内存溢出和内存泄露 <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
@@ -578,3 +718,68 @@ public void setOnClickListener(@Nullable OnClickListener l) {
 ## X、其他未归类 <a href="#目录"><img src="/res/back-top.png" height="20" width="20"/></a>
 
 ### JNI & NDK <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+### Java & JS <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
+
+实现Java和JS交互十分便捷：
+- WebView开启JavaScript脚本执行；
+	- WebSettings settings = myWebView.getSettings();
+	- settings.setJavaScriptEnabled(true);
+
+
+- WebView设置供JavaScript调用的交互接口；
+	- myWebView.addJavascriptInterface(new JsInteration(), "control");
+	- JsInteration()方法下文介绍；
+
+```java
+public class JsInteration {
+
+		@JavascriptInterface
+		public void toastMessage(String message) {
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+		}
+
+		@JavascriptInterface
+		public void onSumResult(int result) {
+				Log.i(LOGTAG, "onSumResult result=" + result);
+		}
+}
+```
+
+	- 网页端代码如下：
+
+```html
+<html>
+<script type="text/javascript">
+    function sayHello() {
+        alert("Hello")
+    }
+
+    function alertMessage(message) {
+        alert(message)
+    }
+
+    function toastMessage(message) {
+        window.control.toastMessage(message)
+    }
+
+    function sumToJava(number1, number2){
+       window.control.onSumResult(number1 + number2)
+    }
+</script>
+Java-Javascript Interaction In Android
+</html>
+```
+
+- 客户端和网页端编写调用对方的代码；
+	- Java调用JS
+
+
+
+
+
+
+
+
+
+# THE END
