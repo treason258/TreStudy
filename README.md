@@ -721,6 +721,8 @@ public void setOnClickListener(@Nullable OnClickListener l) {
 
 ### Java & JS <a href="#目录"><img src="/res/back-top.png" height="15" width="15"/></a>
 
+http://droidyue.com/blog/2014/09/20/interaction-between-java-and-javascript-in-android/
+
 实现Java和JS交互十分便捷：
 - WebView开启JavaScript脚本执行；
 	- WebSettings settings = myWebView.getSettings();
@@ -773,9 +775,44 @@ Java-Javascript Interaction In Android
 
 - 客户端和网页端编写调用对方的代码；
 	- Java调用JS
+		- 调用js无参无返回值函数
 
+```java
+String call = "javascript:sayHello()";
+webView.loadUrl(call);
+```
 
+		- 调用js有参无返回值函数
 
+```java
+String call = "javascript:alertMessage(\"" + "content" + "\")";
+webView.loadUrl(call);
+```
+
+		- 调用js有参数有返回值的函数
+
+```java
+String call = "javascript:sumToJava(1,2)";
+webView.loadUrl(call);
+```
+
+对于调用js有参数有返回的函数，在Android 4.4之后使用evaluateJavascript即可，如下：
+
+```java
+webView.evaluateJavascript("getGreetings()", new ValueCallback<String>() {
+  @Override
+  public void onReceiveValue(String value) {
+      Log.i(LOGTAG, "onReceiveValue value=" + value);
+  }});
+```
+
+注意：
+
+-	设置WebChromeClient
+- 网页加载完成之后调用js方法
+- 自己创建一个注释接口名字为@JavascriptInterface，然后将其引入
+- 代码混淆问题
+- 在js调用后的Java回调线程为主线程
 
 
 
