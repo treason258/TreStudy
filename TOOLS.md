@@ -69,6 +69,6 @@
 	- [神奇的Android Studio Template](http://blog.csdn.net/lmj623565791/article/details/51592043)
 	- [Android Studio自定义模板 写页面竟然可以如此轻松](http://blog.csdn.net/lmj623565791/article/details/51635533)
 
-> - 福利
+> - 福利社
 > 	- http呵呵://c2你.1024mx懂.rocks的/pw/
 > 	- http呵呵://www你.caoliuzx懂.com的/
