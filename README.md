@@ -826,3 +826,77 @@ webView.evaluateJavascript("getGreetings()", new ValueCallback<String>() {
 # THE END
 
 # THE END
+
+### DeepLink需求
+优信二手车现有deeplink可跳转的页面：首页、独立列表页、详情页、WebView页面
+* 打开指定页面示例
+    * 打开首页：**uxin://uxin.app/openWith**
+    * 打车车市列表页：**uxin://uxin.app/openDirectHalfCarActivity**
+    * 打开车市列表页并带品牌车系条件：**uxin://uxin.app/openDirectHalfCarActivity?brandid=62&brandname=奥迪&serieid=621&seriename=A4LL**
+    * 打开指定车辆的详情页：**uxin://uxin.app/openVehicleDetailsActivity?car_id=13192705**
+    * 打开APP内H5页面：**uxin://uxin.app/WebViewActivityActivity?url=https://m.xin.com/beijing/**
+* 返回功能需要的参数（进入APP后在页面左侧显示返回按钮）
+    * channel - 来源标识
+    * back_url - 返回第三方浏览器之后需要打开的url
+* 其他：
+    * 不同页面由于技术实现不同，可能跳转过程效果也可能不同。比如：跳转车市列表页时需要经过闪屏页面和首页，跳转车辆详情页则不需要，但是车辆详情页返回回到的是来源APP。所以具体效果可自行测试已实际为准。如有其它需求请同步。
+
+### 当前方案
+现在的deeplink实现方式如下：
+* 1、第三方app通过scheme://host/pathPrefix协议唤起优信二手车，打开对应页面；
+* 2、页面的onCreate中，通过getIntent().getData().getQueryParameter(String key)方法获取channel和back_url两个参数；
+* 3、其中channel唯一对应了deeplink合作方，在页面左侧显示**对应合作方的返回按钮图片**；
+* 4、点击返回按钮图片时，根据**约定好的第三方app包名**，使用packageManager.getLaunchIntentForPackage(String packageName)获取到第三方app的intent，然后跳转；
+* 5、如果第三方app是浏览器类型，还需要使用刚才获取的back_url，通过intent.setData(Uri uri)方可跳转到第三方app的指定url；
+
+问题：每次有新的第三方接入deeplink，需要在代码中配置
+
+注:（scheme[skim]）
+
+### 计划方案
+通过在线配置方式，在线配置后台维护这么一组有结构的数据
+```
+{
+    "deeplink": [
+        {
+            "channel": "oppo",
+            "backIcon": "http://wx3.sinaimg.cn/mw690/676281bfly1fyteirzy6uj205f01oa9t.jpg"
+            "backPackage": "com.android.browser",
+        },
+        {
+            "channel": "vivo",
+            "backIcon": "http://wx3.sinaimg.cn/mw690/676281bfly1fyteivb1d6j205f01o3y9.jpg"
+            "backPackage": "com.vivo.browser",
+        },
+        {
+            "channel": "toutiao",
+            "backIcon": "http://wx4.sinaimg.cn/mw690/676281bfly1fyteic5nacj205b01uglf.jpg"
+            "backPackage": "com.ss.android.article.news",
+        }
+    ]
+}
+```
+把之前方案中需要用到的**返回按钮图片**和返回包名**第三方app包名**改为在线获取，流程不变；
+
+###测试
+* oppo
+    * uxin://uxin.app/openWith?channel=oppo&back_url=https://m.xin.com/beijing/
+* vivo
+    * uxin://uxin.app/openWith?channel=vivo&back_url=https://m.xin.com/beijing/
+* toutiao
+    * uxin://uxin.app/openWith?channel=toutiao
+
+###其他待解决问题
+* 1.统一在启动页做拦截
+* 2.跳转的各个页面的回退逻辑处理
+* 3.返回按钮的全局显示
+
+统一在启动页做拦截方案
+* 方案1：启动页 -> 首页 -> 落地页
+* 方案2：启动页 -> 落地页 -> 返回首页
+
+方案2工作内容：
+1. 所有scheme配置放在SplashActivity下；
+1. 在SplashActivity分发处理；
+1. 每个DeepLink可到达页面需要处理返回事件；
+1. 
